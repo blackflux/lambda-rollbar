@@ -1,0 +1,50 @@
+{
+  "name": "lambda-rollbar",
+  "version": "0.0.0-development",
+  "description": "Rollbar wrapper for Serverless, API Gateway and Lambda.",
+  "main": "lib/rollbar.js",
+  "scripts": {
+    "test": "grunt gardener",
+    "coveralls": "node ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simlu/lambda-rollbar.git"
+  },
+  "keywords": [
+    "rollbar",
+    "lambda",
+    "serverless",
+    "wrapper",
+    "api"
+  ],
+  "author": "Lukas Siemon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simlu/lambda-rollbar/issues"
+  },
+  "homepage": "https://github.com/simlu/lambda-rollbar#readme",
+  "devDependencies": {
+    "chai": "4.1.2",
+    "coveralls": "3.0.0",
+    "js-gardener": "1.1.0",
+    "semantic-release": "8.2.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/simlu/lambda-rollbar/blob/master/LICENSE"
+    }
+  ],
+  "engines": {
+    "node": ">= 6.10.3"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "lodash.get": "4.4.2",
+    "rollbar": "2.3.1"
+  }
+}
