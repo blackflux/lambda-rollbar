@@ -14,3 +14,23 @@ Rollbar wrapper for Serverless, API Gateway and Lambda.
 ## Getting Started
 
 To install run `npm install --save lambda-rollbar`
+
+## Setup
+
+Define rollbar as
+```javascript
+const rollbar = require('lambda-rollbar')({
+  accessToken: ROLLBAR_ACCESS_TOKEN,
+  environment: ENVIRONMENT,
+  enabled: true,
+  captureUncaught: true,
+  captureUnhandledRejections: true
+});
+```
+
+Wrap lambda handler with
+```javascript
+exports.handler = rollbar.wrap((event, context, callback, rb) => rb
+  .warning("Some Warning...")
+  .then(callback(null, { statusCode: 200, body: "{\"message\":\"Hello World.\"}" })));
+```
