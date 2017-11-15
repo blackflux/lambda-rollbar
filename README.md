@@ -28,7 +28,7 @@ const rollbar = require('lambda-rollbar')({
 });
 ```
 
-Wrap lambda handler with
+Then wrap lambda handler with
 ```javascript
 exports.handler = rollbar.wrap((event, context, callback, rb) => rb
   .warning("Some Warning...")
