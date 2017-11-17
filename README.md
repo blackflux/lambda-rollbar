@@ -6,9 +6,9 @@
 [![Dependencies](https://david-dm.org/simlu/lambda-rollbar/status.svg)](https://david-dm.org/simlu/lambda-rollbar)
 [![NPM](https://img.shields.io/npm/v/lambda-rollbar.svg)](https://www.npmjs.com/package/lambda-rollbar)
 [![Downloads](https://img.shields.io/npm/dt/lambda-rollbar.svg)](https://www.npmjs.com/package/lambda-rollbar)
-[![Semantic-Release](https://github.com/simlu/js-gardener/blob/master/assets/semver/badge.svg)](https://github.com/semantic-release/semantic-release)
+[![Semantic-Release](https://github.com/simlu/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
 [![Gardener](https://github.com/simlu/js-gardener/blob/master/assets/badge.svg)](https://github.com/simlu/js-gardener)
-[![Gitter](https://img.shields.io/gitter/room/simlu/lambda-rollbar.svg)](https://gitter.im/simlu/lambda-rollbar)
+[![Gitter](https://github.com/simlu/js-gardener/blob/master/assets/icons/gitter.svg)](https://gitter.im/simlu/lambda-rollbar)
 
 Rollbar wrapper for Serverless, API Gateway and Lambda.
 
