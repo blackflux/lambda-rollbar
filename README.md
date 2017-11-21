@@ -22,8 +22,8 @@ Define rollbar and wrap handlers with
 <!-- eslint-disable import/no-extraneous-dependencies, import/no-unresolved -->
 ```javascript
 const rollbar = require('lambda-rollbar')({
-  accessToken: "ROLLBAR_ACCESS_TOKEN",
-  environment: "ENVIRONMENT",
+  accessToken: "YOUR_ROLLBAR_ACCESS_TOKEN",
+  environment: "YOUR_ENVIRONMENT",
   enabled: true,
   captureUncaught: true,
   captureUnhandledRejections: true
