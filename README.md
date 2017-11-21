@@ -18,19 +18,17 @@ To install run `npm install --save lambda-rollbar`
 
 ## Setup
 
-Define rollbar as
+Define rollbar and wrap handlers with
+<!-- eslint-disable import/no-extraneous-dependencies, import/no-unresolved -->
 ```javascript
 const rollbar = require('lambda-rollbar')({
-  accessToken: ROLLBAR_ACCESS_TOKEN,
-  environment: ENVIRONMENT,
+  accessToken: "ROLLBAR_ACCESS_TOKEN",
+  environment: "ENVIRONMENT",
   enabled: true,
   captureUncaught: true,
   captureUnhandledRejections: true
 });
-```
 
-Then wrap lambda handler with
-```javascript
 exports.handler = rollbar.wrap((event, context, callback, rb) => rb
   .warning("Some Warning...")
   .then(callback(null, { statusCode: 200, body: "{\"message\":\"Hello World.\"}" })));
