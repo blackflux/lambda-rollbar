@@ -16,7 +16,7 @@ Rollbar wrapper for Serverless, API Gateway and Lambda.
 
 To install run `npm install --save lambda-rollbar`
 
-## Setup
+## Usage
 
 Define rollbar and wrap handlers with
 <!-- eslint-disable import/no-extraneous-dependencies, import/no-unresolved -->
@@ -33,3 +33,7 @@ exports.handler = rollbar.wrap((event, context, callback, rb) => rb
   .warning("Some Warning...")
   .then(callback(null, { statusCode: 200, body: "{\"message\":\"Hello World.\"}" })));
 ```
+
+Available log levels are `debug`, `info`, `warning`, `error` and `critical`.
+
+You can set an environment on a call bases using `rb.warning("your_message", "your_environment")`.
