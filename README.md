@@ -24,9 +24,7 @@ Define rollbar and wrap handlers with
 const rollbar = require('lambda-rollbar')({
   accessToken: "YOUR_ROLLBAR_ACCESS_TOKEN",
   environment: "YOUR_ENVIRONMENT",
-  enabled: true,
-  captureUncaught: true,
-  captureUnhandledRejections: true
+  enabled: true
 });
 
 exports.handler = rollbar.wrap((event, context, callback, rb) => rb
