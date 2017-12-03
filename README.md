@@ -35,3 +35,12 @@ exports.handler = rollbar.wrap((event, context, callback, rb) => rb
 Available log levels are `debug`, `info`, `warning`, `error` and `critical`.
 
 You can set an environment on a call bases using `rb.warning("YOUR_MESSAGE", "YOUR_ENVIRONMENT")`.
+
+## Request Templates
+
+Lambda functions are called in different context. Using the `template` option you can define which context should be assumed. Currently supported are:
+
+- `aws-sls-lambda-proxy` (*default*): Default event template for API Gateway using the [Serverless Framework](https://serverless.com/framework/docs/providers/aws/events/apigateway/)
+- `aws-cloud-watch`: For [CloudWatch logs](http://docs.aws.amazon.com/lambda/latest/dg/eventsources.html#eventsources-cloudwatch-logs) events
+
+Adding additional templates is straight forward and PRs are welcome! 
