@@ -14,8 +14,10 @@ describe("Testing AWS Cloud Watch Template", () => {
       }
     };
     expect(template(input)).to.deep.equal({
-      raw: input.awslogs.data,
-      error: "incorrect header check"
+      body: {
+        raw: input.awslogs.data,
+        error: "incorrect header check"
+      }
     });
   });
 
@@ -33,8 +35,7 @@ describe("Testing AWS Cloud Watch Template", () => {
       }
     };
     expect(template(input)).to.deep.equal({
-      raw: input.awslogs.data,
-      content: {
+      body: {
         logEvents: [
           {
             extractedFields: {
