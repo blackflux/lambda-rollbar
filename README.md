@@ -46,4 +46,4 @@ Lambda functions are called in different context. Using the `template` option yo
 
 ## Contributions / What is next
 
-- **More Templates** - Adding additional templates is straight forward and PRs are welcome! Sample events can be found [here](http://docs.aws.amazon.com/lambda/latest/dg/eventsources.html).
+- **Additional Templates** - Adding more templates is easy and PRs are welcome! Sample events can be found [here](http://docs.aws.amazon.com/lambda/latest/dg/eventsources.html).
