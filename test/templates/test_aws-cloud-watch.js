@@ -35,43 +35,19 @@ describe("Testing AWS Cloud Watch Template", () => {
       }
     };
     expect(template(input)).to.deep.equal({
-      body: {
-        logEvents: [
-          {
-            extractedFields: {
-              event: "MONITORING|10|count|page_view|theburningmonk.com",
-              request_id: "090cd75a-8aa6-11e7-87b9-6bfa12817d51",
-              timestamp: "2017-08-26T21:32:17.909Z"
-            },
-            id: "33535484592355445645625676138044830609838403537205854208",
-            message: (
-              "2017-08-26T21:32:17.909Z\t090cd75a-8aa6-11e7-87b9-6bfa12817d51\t" +
-              "MONITORING|10|count|page_view|theburningmonk.com\n"
-            ),
-            timestamp: 1503783137909
-          },
-          {
-            extractedFields: {
-              event: "MONITORING|3.8|milliseconds|latency|theburningmonk.com",
-              request_id: "090cd75a-8aa6-11e7-87b9-6bfa12817d51",
-              timestamp: "2017-08-26T21:32:17.909Z"
-            },
-            id: "33535484592355445645625676138044830609838403537205854209",
-            message: (
-              "2017-08-26T21:32:17.909Z\t090cd75a-8aa6-11e7-87b9-6bfa12817d51\t" +
-              "MONITORING|3.8|milliseconds|latency|theburningmonk.com\n"
-            ),
-            timestamp: 1503783137909
-          }
-        ],
-        logGroup: "/aws/lambda/logging-metrics-demo-dev-test-api",
-        logStream: "2017/08/26/[$LATEST]d5aa44b6a9e84e189b2acb73e0389322",
-        messageType: "DATA_MESSAGE",
-        owner: "499014364541",
-        subscriptionFilters: [
-          "LambdaStream_logging-metrics-demo-dev-send-metrics"
-        ]
-      },
+      body: (
+        "{\"messageType\":\"DATA_MESSAGE\",\"owner\":\"499014364541\",\"logGroup\":\"/aws/lambda/logging-metrics-demo" +
+        "-dev-test-api\",\"logStream\":\"2017/08/26/[$LATEST]d5aa44b6a9e84e189b2acb73e0389322\",\"subscriptionFilters" +
+        "\":[\"LambdaStream_logging-metrics-demo-dev-send-metrics\"],\"logEvents\":[{\"id\":\"33535484592355445645625" +
+        "676138044830609838403537205854208\",\"timestamp\":1503783137909,\"message\":\"2017-08-26T21:32:17.909Z\\t090" +
+        "cd75a-8aa6-11e7-87b9-6bfa12817d51\\tMONITORING|10|count|page_view|theburningmonk.com\\n\",\"extractedFields" +
+        "\":{\"event\":\"MONITORING|10|count|page_view|theburningmonk.com\",\"request_id\":\"090cd75a-8aa6-11e7-87b9-" +
+        "6bfa12817d51\",\"timestamp\":\"2017-08-26T21:32:17.909Z\"}},{\"id\":\"33535484592355445645625676138044830609" +
+        "838403537205854209\",\"timestamp\":1503783137909,\"message\":\"2017-08-26T21:32:17.909Z\\t090cd75a-8aa6-11e7" +
+        "-87b9-6bfa12817d51\\tMONITORING|3.8|milliseconds|latency|theburningmonk.com\\n\",\"extractedFields\":{\"even" +
+        "t\":\"MONITORING|3.8|milliseconds|latency|theburningmonk.com\",\"request_id\":\"090cd75a-8aa6-11e7-87b9-6bfa" +
+        "12817d51\",\"timestamp\":\"2017-08-26T21:32:17.909Z\"}}]}"
+      ),
       url: (
         "https://console.aws.amazon.com/cloudwatch/home#logEventViewer:" +
         "group=/aws/lambda/logging-metrics-demo-dev-test-api;" +
