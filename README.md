@@ -35,7 +35,7 @@ exports.handler = rollbar.wrap((event, context, callback, rb) => rb
 
 Available log levels are `debug`, `info`, `warning`, `error` and `critical`.
 
-You can set an environment on a call bases using `rb.warning("YOUR_MESSAGE", "YOUR_ENVIRONMENT")`.
+You can set an environment on a per call bases using `rb.warning("YOUR_MESSAGE", "YOUR_ENVIRONMENT")`.
 
 ## Request Templates
 
@@ -46,4 +46,4 @@ Lambda functions are called in different context. Using the `template` option yo
 
 ## Contributions / What is next
 
-- **Additional Templates** - Adding more templates is easy and PRs are welcome! Sample events can be found [here](http://docs.aws.amazon.com/lambda/latest/dg/eventsources.html).
+- **Templates** - Adding more templates is easy and PRs are welcome! Sample events can be found [here](http://docs.aws.amazon.com/lambda/latest/dg/eventsources.html).
