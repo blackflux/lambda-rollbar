@@ -3,6 +3,22 @@ const expect = require("chai").expect;
 const template = require("./../../lib/templates/aws-cloud-watch");
 
 describe("Testing AWS Cloud Watch Template", () => {
+  it("Test Invalid GZip", () => {
+    const input = {
+      awslogs: {
+        data: (
+          "68JlBUk+l7KSN7tCOEJ4M3/qOI49vMH4sIAAFtKV3akI8d0bLYmibvPPN3wz00CJxmQnTO41wABBAAAAHWPwQqCQBCEcB6sQbFC3CjW3XW" +
+          "8kxpOpP+OC22d1Wml1qZkQGtoMsScGX0Xm7EFtK+smZBEUgXoLCdMhhwWQRIctmxaczKN3plG8zlaHIta5KqWsozoTYw3/djzwhpLwivWF" +
+          "GHGpAFe7DLHj+zCKdlFqLaU2ZHV2a4Ct/an0/ivdX8oYc1UVX860fQDQiMdxRQEAAA=="
+        )
+      }
+    };
+    expect(template(input)).to.deep.equal({
+      raw: input.awslogs.data,
+      error: "incorrect header check"
+    });
+  });
+
   it("Testing Generated Output", () => {
     const input = {
       awslogs: {
