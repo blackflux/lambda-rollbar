@@ -35,7 +35,7 @@ exports.handler = rollbar.wrap((event, context, callback, rb) => rb
 
 Available log levels are `debug`, `info`, `warning`, `error` and `critical`.
 
-You can set an environment on a call bases using `rb.warning("YOUR_MESSAGE", "YOUR_ENVIRONMENT")`.
+You can set an environment on a per call bases using `rb.warning("YOUR_MESSAGE", "YOUR_ENVIRONMENT")`.
 
 ## Request Templates
 
