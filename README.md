@@ -39,11 +39,11 @@ You can set an environment on a per call bases using `rb.warning("YOUR_MESSAGE",
 
 ## Request Templates
 
-Lambda functions are called in different context. Using the `template` option you can define which context should be assumed. Currently supported are:
+Lambda functions are called in different [request context](https://rollbar.com/docs/notifier/rollbar.js/#rollbarlog-1). Using the `template` option you can define which request context should be assumed. Currently supported are:
 
 - `aws-sls-lambda-proxy` (*default*) - Default event template for API Gateway using the [Serverless Framework](https://serverless.com/framework/docs/providers/aws/events/apigateway/)
 - `aws-cloud-watch` - For [CloudWatch logs](http://docs.aws.amazon.com/lambda/latest/dg/eventsources.html#eventsources-cloudwatch-logs) events
 
 ## Contributions / What is next
 
-- **Templates** - Adding more templates is easy and PRs are welcome! Sample events can be found [here](http://docs.aws.amazon.com/lambda/latest/dg/eventsources.html).
+- **Templates** - Adding more templates is easy and PRs are welcome! Sample events can be found [here](http://docs.aws.amazon.com/lambda/latest/dg/eventsources.html). Make sure you only use fields listed under [request](https://rollbar.com/docs/notifier/rollbar.js/#rollbarlog-1), i.e. `url`, `method`, `body`.
