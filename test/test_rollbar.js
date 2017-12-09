@@ -1,7 +1,14 @@
 /* eslint-disable no-console */
 const expect = require("chai").expect;
-const rollbar = require("../lib/rollbar")({
-  enabled: false
+const Rollbar = require("../lib/rollbar");
+
+const rollbarDebug = Rollbar({
+  enabled: false,
+  debug: true
+});
+const rollbarNonDebug = Rollbar({
+  enabled: false,
+  debug: false
 });
 
 const consoleLogOriginal = console.log;
@@ -12,7 +19,7 @@ const response = {
   body: "{\"message\":\"Invalid Parameter.\"}"
 };
 const executeHandler = (err, resp, cb) => {
-  rollbar.wrap((event, context, func) => func(err, resp))(
+  rollbarDebug.wrap((event, context, func) => func(err, resp))(
     {},
     { getRemainingTimeInMillis: () => 0 },
     (err_, resp_) => {
@@ -44,10 +51,17 @@ describe("Testing Rollbar Wrapper", () => {
     executeHandler(error, response, done);
   });
 
-  it("Testing Exception", () => {
-    expect(() => rollbar.wrap(() => {
+  it("Testing Exception Debug", () => {
+    expect(() => rollbarDebug.wrap(() => {
       throw error;
     })({}, { getRemainingTimeInMillis: () => 0 }, {})).to.throw(error);
     expect(logs).to.deep.equal([error.message]);
+  });
+
+  it("Testing Exception Non-Debug", () => {
+    expect(() => rollbarNonDebug.wrap(() => {
+      throw error;
+    })({}, { getRemainingTimeInMillis: () => 0 }, {})).to.throw(error);
+    expect(logs).to.deep.equal([]);
   });
 });

@@ -37,6 +37,10 @@ Available log levels are `debug`, `info`, `warning`, `error` and `critical`.
 
 You can set an environment on a per call bases using `rb.warning("YOUR_MESSAGE", "YOUR_ENVIRONMENT")`.
 
+## Debug Option
+
+Use the boolean `debug` option (defaults to `false`) to log messages to console.
+
 ## Request Templates
 
 Lambda functions are called in different [request context](https://rollbar.com/docs/notifier/rollbar.js/#rollbarlog-1). Using the `template` option you can define which request context should be assumed. Currently supported are:
