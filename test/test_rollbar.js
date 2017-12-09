@@ -2,13 +2,13 @@
 const expect = require("chai").expect;
 const Rollbar = require("../lib/rollbar");
 
-const rollbarDebug = Rollbar({
+const rollbarEcho = Rollbar({
   enabled: false,
-  debug: true
+  echo: true
 });
-const rollbarNonDebug = Rollbar({
+const rollbarNonEcho = Rollbar({
   enabled: false,
-  debug: false
+  echo: false
 });
 
 const consoleLogOriginal = console.log;
@@ -19,7 +19,7 @@ const response = {
   body: "{\"message\":\"Invalid Parameter.\"}"
 };
 const executeHandler = (err, resp, cb) => {
-  rollbarDebug.wrap((event, context, func) => func(err, resp))(
+  rollbarEcho.wrap((event, context, func) => func(err, resp))(
     {},
     { getRemainingTimeInMillis: () => 0 },
     (err_, resp_) => {
@@ -51,15 +51,15 @@ describe("Testing Rollbar Wrapper", () => {
     executeHandler(error, response, done);
   });
 
-  it("Testing Exception Debug", () => {
-    expect(() => rollbarDebug.wrap(() => {
+  it("Testing Exception Echo", () => {
+    expect(() => rollbarEcho.wrap(() => {
       throw error;
     })({}, { getRemainingTimeInMillis: () => 0 }, {})).to.throw(error);
     expect(logs).to.deep.equal([error.message]);
   });
 
-  it("Testing Exception Non-Debug", () => {
-    expect(() => rollbarNonDebug.wrap(() => {
+  it("Testing Exception Non-Echo", () => {
+    expect(() => rollbarNonEcho.wrap(() => {
       throw error;
     })({}, { getRemainingTimeInMillis: () => 0 }, {})).to.throw(error);
     expect(logs).to.deep.equal([]);
