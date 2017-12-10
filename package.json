@@ -44,7 +44,6 @@
     "lib"
   ],
   "dependencies": {
-    "lodash.defaults": "4.2.0",
     "lodash.get": "4.4.2",
     "lodash.omit": "4.5.0",
     "rollbar": "2.3.2"
