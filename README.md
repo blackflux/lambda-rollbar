@@ -37,9 +37,9 @@ Available log levels are `debug`, `info`, `warning`, `error` and `critical`.
 
 You can set an environment on a per call bases using `rb.warning("YOUR_MESSAGE", "YOUR_ENVIRONMENT")`.
 
-## Echo Option
+## Verbose Option
 
-Use the boolean `echo` option (defaults to `false`) to log messages to console.
+Use the boolean `verbose` option to log messages to console. This option also get's passed through into [rollbar](https://github.com/rollbar/rollbar.js#verbose-option).
 
 ## Request Templates
 
