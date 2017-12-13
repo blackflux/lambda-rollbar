@@ -46,6 +46,6 @@
   "dependencies": {
     "lodash.get": "4.4.2",
     "lodash.omit": "4.5.0",
-    "rollbar": "2.3.2"
+    "rollbar": "2.3.3"
   }
 }
