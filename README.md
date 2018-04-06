@@ -28,9 +28,9 @@ const rollbar = require('lambda-rollbar')({
   template: 'aws-sls-lambda-proxy'
 });
 
-exports.handler = rollbar.wrap((event, context, callback, rb) => rb
+exports.handler = rollbar.wrap((event, context, rb) => rb
   .warning("Some Warning...")
-  .then(callback(null, { statusCode: 200, body: "{\"message\":\"Hello World.\"}" })));
+  .then({ statusCode: 200, body: "{\"message\":\"Hello World.\"}" }));
 ```
 
 Available log levels are `debug`, `info`, `warning`, `error` and `critical`.
