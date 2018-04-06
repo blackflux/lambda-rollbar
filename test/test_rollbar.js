@@ -18,8 +18,9 @@ const response = {
   statusCode: 400,
   body: "{\"message\":\"Invalid Parameter.\"}"
 };
+
 const executeHandler = (err, resp, cb) => {
-  rollbarVerbose.wrap((event, context, func) => func(err, resp))(
+  rollbarVerbose.wrap(() => (err ? Promise.reject(err) : Promise.resolve(resp)))(
     {},
     { getRemainingTimeInMillis: () => 0 },
     (err_, resp_) => {
@@ -48,7 +49,7 @@ describe("Testing Rollbar Wrapper", () => {
   });
 
   it("Testing Execution With Error", (done) => {
-    executeHandler(error, response, done);
+    executeHandler(error, undefined, done);
   });
 
   it("Testing Exception Verbose", () => {
