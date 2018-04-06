@@ -19,7 +19,7 @@ const response = {
   body: "{\"message\":\"Invalid Parameter.\"}"
 };
 
-const executeHandlerPromise = (err, resp, cb) => {
+const executeHandler = (err, resp, cb) => {
   rollbarVerbose.wrap(() => (err ? Promise.reject(err) : Promise.resolve(resp)))(
     {},
     { getRemainingTimeInMillis: () => 0 },
@@ -44,12 +44,12 @@ describe("Testing Rollbar Wrapper", () => {
     logs.length = 0;
   });
 
-  it("Testing Execution Without Error (Promise)", (done) => {
-    executeHandlerPromise(null, response, done);
+  it("Testing Execution Without Error", (done) => {
+    executeHandler(null, response, done);
   });
 
-  it("Testing Execution With Error (Promise)", (done) => {
-    executeHandlerPromise(error, undefined, done);
+  it("Testing Execution With Error", (done) => {
+    executeHandler(error, undefined, done);
   });
 
   it("Testing Exception Verbose", () => {
