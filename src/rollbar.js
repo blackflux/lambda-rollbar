@@ -54,7 +54,7 @@ module.exports = (options) => {
       }), {});
 
       try {
-        return handler(event, context, rb)
+        handler(event, context, rb)
           .then(resp => rollbar.wait(() => callback(null, resp)))
           .catch((err) => {
             rb.error(err);
@@ -62,7 +62,7 @@ module.exports = (options) => {
           });
       } catch (err) {
         rb.error(err);
-        return rollbar.wait(() => {
+        rollbar.wait(() => {
           throw err;
         });
       }
