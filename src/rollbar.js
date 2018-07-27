@@ -1,7 +1,7 @@
 const get = require('lodash.get');
 const omit = require('lodash.omit');
 const Rollbar = require("rollbar");
-const ensureString = require("./util/ensureString");
+const ensureString = require("./util/ensure-string");
 
 const templateSlsLambdaProxy = require(`./templates/aws-sls-lambda-proxy`);
 const templateAwsCloudWatch = require(`./templates/aws-cloud-watch`);
