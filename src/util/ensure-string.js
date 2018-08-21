@@ -1,1 +1,3 @@
-module.exports = e => (typeof e === 'string' || e instanceof String ? e : JSON.stringify(e));
+const safeStringify = require('fast-safe-stringify');
+
+module.exports = e => (typeof e === 'string' || e instanceof String ? e : safeStringify(e));

@@ -17,7 +17,7 @@ module.exports = (options) => {
 
   // submit a lambda error to rollbar (async)
   const submitToRollbar = (obj, environment, level, event, context) => {
-    const message = get(obj, 'message', ensureString(obj));
+    const message = get(obj, 'message') || ensureString(obj);
     if (get(options, 'verbose', false) === true) {
       // eslint-disable-next-line no-console
       console.log(message);

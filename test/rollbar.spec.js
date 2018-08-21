@@ -26,7 +26,7 @@ const executeHandler = (err, resp, cb) => {
     (err_, resp_) => {
       expect(err_).to.equal(err);
       expect(resp_).to.equal(resp);
-      expect(logs).to.deep.equal(err === null ? [] : [err.message]);
+      expect(logs).to.deep.equal(err === null ? [] : [err.message || err]);
       cb();
     }
   );
@@ -50,6 +50,10 @@ describe("Testing Rollbar Wrapper", () => {
 
   it("Testing Execution With Error", (done) => {
     executeHandler(error, undefined, done);
+  });
+
+  it("Testing Execution With String Error Message", (done) => {
+    executeHandler("String Error", undefined, done);
   });
 
   it("Testing Exception Verbose", () => {
