@@ -2,6 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/simlu/lambda-rollbar/master.svg)](https://travis-ci.org/simlu/lambda-rollbar)
 [![Test Coverage](https://img.shields.io/coveralls/simlu/lambda-rollbar/master.svg)](https://coveralls.io/github/simlu/lambda-rollbar?branch=master)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=simlu/lambda-rollbar)](https://dependabot.com)
 [![Dependencies](https://david-dm.org/simlu/lambda-rollbar/status.svg)](https://david-dm.org/simlu/lambda-rollbar)
 [![NPM](https://img.shields.io/npm/v/lambda-rollbar.svg)](https://www.npmjs.com/package/lambda-rollbar)
 [![Downloads](https://img.shields.io/npm/dt/lambda-rollbar.svg)](https://www.npmjs.com/package/lambda-rollbar)
