@@ -6,8 +6,8 @@
 [![Dependencies](https://david-dm.org/simlu/lambda-rollbar/status.svg)](https://david-dm.org/simlu/lambda-rollbar)
 [![NPM](https://img.shields.io/npm/v/lambda-rollbar.svg)](https://www.npmjs.com/package/lambda-rollbar)
 [![Downloads](https://img.shields.io/npm/dt/lambda-rollbar.svg)](https://www.npmjs.com/package/lambda-rollbar)
-[![Semantic-Release](https://github.com/simlu/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
-[![Gardener](https://github.com/simlu/js-gardener/blob/master/assets/badge.svg)](https://github.com/simlu/js-gardener)
+[![Semantic-Release](https://github.com/blackflux/js-gardener/blob/master/assets/icons/semver.svg)](https://github.com/semantic-release/semantic-release)
+[![Gardener](https://github.com/blackflux/js-gardener/blob/master/assets/badge.svg)](https://github.com/blackflux/js-gardener)
 [![Gitter](https://github.com/simlu/js-gardener/blob/master/assets/icons/gitter.svg)](https://gitter.im/simlu/lambda-rollbar)
 
 Rollbar wrapper for Serverless, API Gateway and Lambda.
@@ -22,15 +22,15 @@ Define rollbar and wrap handlers with
 <!-- eslint-disable import/no-extraneous-dependencies, import/no-unresolved -->
 ```javascript
 const rollbar = require('lambda-rollbar')({
-  accessToken: "YOUR_ROLLBAR_ACCESS_TOKEN",
-  environment: "YOUR_ENVIRONMENT",
+  accessToken: 'YOUR_ROLLBAR_ACCESS_TOKEN',
+  environment: 'YOUR_ENVIRONMENT',
   enabled: true,
   template: 'aws-sls-lambda-proxy'
 });
 
 exports.handler = rollbar.wrap((event, context, rb) => rb
-  .warning("Some Warning...")
-  .then({ statusCode: 200, body: "{\"message\":\"Hello World.\"}" }));
+  .warning('Some Warning...')
+  .then({ statusCode: 200, body: '{"message":"Hello World."}' }));
 ```
 
 Available log levels are `debug`, `info`, `warning`, `error` and `critical`.

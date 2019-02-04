@@ -1,19 +1,19 @@
 const get = require('lodash.get');
 const omit = require('lodash.omit');
-const Rollbar = require("rollbar");
-const ensureString = require("./util/ensure-string");
+const Rollbar = require('rollbar');
+const ensureString = require('./util/ensure-string');
 
-const templateSlsLambdaProxy = require(`./templates/aws-sls-lambda-proxy`);
-const templateAwsCloudWatch = require(`./templates/aws-cloud-watch`);
+const templateSlsLambdaProxy = require('./templates/aws-sls-lambda-proxy');
+const templateAwsCloudWatch = require('./templates/aws-cloud-watch');
 
 const templates = {
-  "aws-sls-lambda-proxy": templateSlsLambdaProxy,
-  "aws-cloud-watch": templateAwsCloudWatch
+  'aws-sls-lambda-proxy': templateSlsLambdaProxy,
+  'aws-cloud-watch': templateAwsCloudWatch
 };
 
 module.exports = (options) => {
   const rollbar = new Rollbar(omit(options, ['template']));
-  const template = templates[get(options, 'template', "aws-sls-lambda-proxy")];
+  const template = templates[get(options, 'template', 'aws-sls-lambda-proxy')];
 
   // submit a lambda error to rollbar (async)
   const submitToRollbar = (obj, environment, level, event, context) => {
@@ -49,7 +49,7 @@ module.exports = (options) => {
       context.callbackWaitsForEmptyEventLoop = false;
 
       // Rollbar logging levels as promise
-      const rb = ["debug", "info", "warning", "error", "critical"].reduce((final, level) => Object.assign(final, {
+      const rb = ['debug', 'info', 'warning', 'error', 'critical'].reduce((final, level) => Object.assign(final, {
         [level]: (err, env = options.environment) => submitToRollbar(err, env, level, event, context)
       }), {});
 
