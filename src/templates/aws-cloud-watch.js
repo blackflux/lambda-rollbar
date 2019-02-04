@@ -1,6 +1,6 @@
-const zlib = require("zlib");
+const zlib = require('zlib');
 const get = require('lodash.get');
-const ensureString = require("../util/ensure-string");
+const ensureString = require('../util/ensure-string');
 
 module.exports = (event) => {
   const raw = get(event, 'awslogs.data');

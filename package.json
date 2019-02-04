@@ -32,16 +32,18 @@
   },
   "homepage": "https://github.com/simlu/lambda-rollbar#readme",
   "devDependencies": {
-    "chai": "4.1.2",
+    "chai": "4.2.0",
     "coveralls": "3.0.2",
-    "js-gardener": "1.31.1",
-    "semantic-release": "15.9.9",
-    "nyc": "12.0.2",
-    "babel-cli": "7.0.0-beta.3",
-    "babel-register": "7.0.0-beta.3",
-    "babel-eslint": "8.2.6",
-    "babel-plugin-transform-flow-comments": "7.0.0-beta.3",
-    "babel-preset-flow": "7.0.0-beta.3"
+    "js-gardener": "1.34.2",
+    "semantic-release": "15.13.3",
+    "nyc": "13.1.0",
+    "babel-eslint": "10.0.1",
+    "@babel/register": "7.0.0",
+    "@babel/core": "7.2.2",
+    "@babel/cli": "7.2.3",
+    "@babel/plugin-transform-flow-comments": "7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "7.3.1",
+    "@babel/preset-flow": "7.0.0"
   },
   "licenses": [
     {
@@ -59,11 +61,11 @@
     "fast-safe-stringify": "2.0.6",
     "lodash.get": "4.4.2",
     "lodash.omit": "4.5.0",
-    "rollbar": "2.4.4"
+    "rollbar": "2.5.2"
   },
   "peerDependencies": {},
   "nyc": {
-    "tempDirectory": "./coverage/.nyc_output",
+    "tempDir": "./coverage/.nyc_output",
     "report-dir": "./coverage",
     "check-coverage": true,
     "per-file": false,
@@ -86,7 +88,7 @@
       "text-summary"
     ],
     "require": [
-      "babel-register"
+      "@babel/register"
     ],
     "extension": [],
     "cache": true,
