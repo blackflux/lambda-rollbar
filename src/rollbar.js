@@ -17,7 +17,10 @@ module.exports = (options) => {
 
   // submit a lambda error to rollbar (async)
   const submitToRollbar = (obj, environment, level, event, context) => {
-    const msgPrefix = [get(obj, 'statusCode'), get(obj, 'messageId')].filter(e => typeof e === 'string').join('@');
+    const msgPrefix = [
+      get(obj, 'statusCode'),
+      get(obj, 'messageId')
+    ].filter(e => !['', undefined].includes(e)).join('@');
     const msgBody = get(obj, 'message') || ensureString(obj);
     const message = [msgPrefix, msgBody].filter(e => !['', undefined].includes(e)).join(': ');
     if (get(options, 'verbose', false) === true) {
