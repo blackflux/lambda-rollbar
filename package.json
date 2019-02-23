@@ -33,7 +33,7 @@
   "homepage": "https://github.com/blackflux/lambda-rollbar#readme",
   "devDependencies": {
     "chai": "4.2.0",
-    "coveralls": "3.0.2",
+    "coveralls": "3.0.3",
     "js-gardener": "1.37.3",
     "semantic-release": "15.13.3",
     "nyc": "13.3.0",
