@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const expect = require('chai').expect;
-const Rollbar = require('../src/rollbar');
+const Rollbar = require('../src/index');
 
 const rollbarVerbose = Rollbar({
   enabled: false,
