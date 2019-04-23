@@ -5913,10 +5913,10 @@ robo-config@2.2.5:
     object-treeify "1.1.8"
     smart-fs "1.7.2"
 
-rollbar@2.5.5:
-  version "2.5.5"
-  resolved "https://registry.yarnpkg.com/rollbar/-/rollbar-2.5.5.tgz#6e4a9ee4942a0a063e06af8ab58b946ce7f9be4e"
-  integrity sha512-Cn+Why5DlPNg5jIDrU3ntjucsiAJgT0QOF/s+EVbdiDA2WD6eZJkdACQmK5S3JyINPUIjh+CWCtX9YPCnA/q4A==
+rollbar@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/rollbar/-/rollbar-2.6.0.tgz#f6bacd7897bc778a25422a51fcdf6846a1661213"
+  integrity sha512-f7zSaucNBwWslV75Wr9SBI4am+sWV0Vg5ou459EAu9KZMvdum0I9i1RO8Opjk95yVEyBdO8kwiNEACz5QnqwiA==
   dependencies:
     async "~1.2.1"
     console-polyfill "0.3.0"
