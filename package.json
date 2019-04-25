@@ -41,7 +41,7 @@
     "chai": "4.2.0",
     "coveralls": "3.0.3",
     "eslint": "5.16.0",
-    "js-gardener": "2.0.15",
+    "js-gardener": "2.0.16",
     "nyc": "14.0.0",
     "semantic-release": "15.13.3"
   },
@@ -61,7 +61,7 @@
     "fast-safe-stringify": "2.0.6",
     "lodash.get": "4.4.2",
     "lodash.omit": "4.5.0",
-    "rollbar": "2.6.0"
+    "rollbar": "2.6.1"
   },
   "peerDependencies": {},
   "nyc": {
