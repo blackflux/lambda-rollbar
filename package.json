@@ -55,7 +55,7 @@
     "fast-safe-stringify": "2.0.6",
     "lodash.get": "4.4.2",
     "lodash.omit": "4.5.0",
-    "rollbar": "2.8.1"
+    "rollbar": "2.9.0"
   },
   "peerDependencies": {},
   "nyc": {
