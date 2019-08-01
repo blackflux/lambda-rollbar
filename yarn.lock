@@ -168,10 +168,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blackflux/eslint-plugin-rules@1.0.26":
-  version "1.0.26"
-  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.0.26.tgz#8344477a5855632833fc2b3f39e7b5db702dd1f6"
-  integrity sha512-l9eJHQM+b4b7rGK2ffYN4q8NbCLhIThzqe3sL/siPDA2M5EzV0/A0f7svG56pKNW9QL6zC1a/t3UsqemMR9now==
+"@blackflux/eslint-plugin-rules@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@blackflux/eslint-plugin-rules/-/eslint-plugin-rules-1.1.0.tgz#fb48926234c07f5b2a2b46f5b3a5f88b8d4bc2ac"
+  integrity sha512-YW7D/rnCZn6zZUGTgd28X/yaKHaKFj5o4iuV0lptEejz7iNE+WrDjZNZ3oTVmn0JxARP0gn5ZcyeYef6ToIkdw==
   dependencies:
     smart-fs "1.9.2"
 
@@ -6210,10 +6210,10 @@ robo-config@3.0.32:
     object-treeify "1.1.14"
     smart-fs "1.9.2"
 
-rollbar@2.9.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/rollbar/-/rollbar-2.9.0.tgz#ec68b3838b38ea012895ee26600c839b354c881b"
-  integrity sha512-U6rJDASAKnFAQY9SB2+is1vNceyIbnggsZgtE8+69LauN6QoEJr6l8bhna2+TatfVm6+vWBmq2zj2IRwTA/Eew==
+rollbar@2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/rollbar/-/rollbar-2.10.0.tgz#a18c333eb45ebd21be128afdf9bf3a0093be7218"
+  integrity sha512-Ifr+KB8cXsaE9Lae3o2X7jx+WAAHMxul44Bj+P+0uGxbTO4TcHFRloUWgPVtmHxuFjpDchHbhwMwMicTseEb1Q==
   dependencies:
     async "~1.2.1"
     buffer-from ">=1.1"
