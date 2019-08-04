@@ -23,10 +23,18 @@
     "type": "git",
     "url": "https://github.com/blackflux/lambda-rollbar.git"
   },
-  "keywords": ["rollbar", "lambda", "serverless", "wrapper", "api"],
+  "keywords": [
+    "rollbar",
+    "lambda",
+    "serverless",
+    "wrapper",
+    "api"
+  ],
   "author": "Lukas Siemon",
   "license": "MIT",
-  "bugs": {"url": "https://github.com/blackflux/lambda-rollbar/issues"},
+  "bugs": {
+    "url": "https://github.com/blackflux/lambda-rollbar/issues"
+  },
   "homepage": "https://github.com/blackflux/lambda-rollbar#readme",
   "devDependencies": {
     "@babel/cli": "7.5.5",
@@ -34,7 +42,7 @@
     "@babel/plugin-proposal-object-rest-spread": "7.5.5",
     "@babel/register": "7.5.5",
     "@blackflux/eslint-plugin-rules": "1.1.0",
-    "@blackflux/robo-config-plugin": "2.2.3",
+    "@blackflux/robo-config-plugin": "2.3.0",
     "babel-eslint": "10.0.2",
     "chai": "4.2.0",
     "coveralls": "3.0.5",
@@ -49,8 +57,12 @@
       "url": "https://github.com/blackflux/lambda-rollbar/blob/master/LICENSE"
     }
   ],
-  "engines": {"node": ">= 6.10.3"},
-  "files": ["lib"],
+  "engines": {
+    "node": ">= 6.10.3"
+  },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "fast-safe-stringify": "2.0.6",
     "lodash.get": "4.4.2",
@@ -67,10 +79,22 @@
     "statements": 100,
     "functions": 100,
     "branches": 100,
-    "include": ["**/*.js"],
-    "exclude": ["gardener.js", "node_modules/*", "coverage/*", "lib/*"],
-    "reporter": ["lcov", "text-summary"],
-    "require": ["@babel/register"],
+    "include": [
+      "**/*.js"
+    ],
+    "exclude": [
+      "gardener.js",
+      "node_modules/*",
+      "coverage/*",
+      "lib/*"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ],
+    "require": [
+      "@babel/register"
+    ],
     "extension": [],
     "cache": true,
     "all": true,
