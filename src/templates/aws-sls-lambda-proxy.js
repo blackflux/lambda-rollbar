@@ -1,7 +1,7 @@
 const querystring = require('querystring');
 const get = require('lodash.get');
 
-module.exports = event => ({
+module.exports = (event) => ({
   headers: event.headers,
   protocol: get(event, 'headers.X-Forwarded-Proto'),
   url: (
