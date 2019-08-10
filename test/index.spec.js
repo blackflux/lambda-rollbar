@@ -34,7 +34,7 @@ const executeHandler = (err, resp, cb) => {
 
 describe('Testing Rollbar Wrapper', () => {
   before(() => {
-    console.log = (...args) => Object.keys(args).map(k => args[k]).forEach(value => logs.push(value));
+    console.log = (...args) => Object.keys(args).map((k) => args[k]).forEach((value) => logs.push(value));
   });
   after(() => {
     console.log = consoleLogOriginal;
