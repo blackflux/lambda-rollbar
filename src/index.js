@@ -20,9 +20,9 @@ module.exports = (options) => {
     const msgPrefix = [
       get(obj, 'statusCode'),
       get(obj, 'messageId')
-    ].filter(e => !['', undefined].includes(e)).join('@');
+    ].filter((e) => !['', undefined].includes(e)).join('@');
     const msgBody = get(obj, 'message') || ensureString(obj);
-    const message = [msgPrefix, msgBody].filter(e => !['', undefined].includes(e)).join(': ');
+    const message = [msgPrefix, msgBody].filter((e) => !['', undefined].includes(e)).join(': ');
     if (get(options, 'verbose', false) === true) {
       // eslint-disable-next-line no-console
       console.log(message);
@@ -49,7 +49,7 @@ module.exports = (options) => {
 
   /* Wrap Lambda function handler */
   return {
-    wrap: handler => (event, context, callback) => {
+    wrap: (handler) => (event, context, callback) => {
       // eslint-disable-next-line no-param-reassign
       context.callbackWaitsForEmptyEventLoop = false;
 
@@ -60,7 +60,7 @@ module.exports = (options) => {
 
       try {
         handler(event, context, rb)
-          .then(resp => rollbar.wait(() => callback(null, resp)))
+          .then((resp) => rollbar.wait(() => callback(null, resp)))
           .catch((err) => {
             try {
               rb.error(err);
