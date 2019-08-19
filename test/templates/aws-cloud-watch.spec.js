@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 
-const template = require('./../../src/templates/aws-cloud-watch');
+const template = require('../../src/templates/aws-cloud-watch');
 
 describe('Testing AWS Cloud Watch Template', () => {
   it('Test Invalid GZip', () => {
