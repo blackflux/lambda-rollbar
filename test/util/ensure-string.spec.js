@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const ensureString = require('./../../src/util/ensure-string');
+const ensureString = require('../../src/util/ensure-string');
 
 describe('Testing ensureString', () => {
   it('Testing String', () => {
