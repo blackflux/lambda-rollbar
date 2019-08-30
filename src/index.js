@@ -1,27 +1,37 @@
+const fs = require('fs');
+const path = require('path');
 const get = require('lodash.get');
 const omit = require('lodash.omit');
 const Rollbar = require('rollbar');
 const ensureString = require('./util/ensure-string');
 
-const templateSlsLambdaProxy = require('./templates/aws-sls-lambda-proxy');
-const templateAwsCloudWatch = require('./templates/aws-cloud-watch');
-
-const templates = {
-  'aws-sls-lambda-proxy': templateSlsLambdaProxy,
-  'aws-cloud-watch': templateAwsCloudWatch
-};
+const templates = (() => {
+  const templateDir = path.join(__dirname, 'templates');
+  return fs
+    .readdirSync(templateDir)
+    .map((f) => f.slice(0, -3))
+    .reduce((p, f) => Object.assign(p, {
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      [f]: require(path.join(templateDir, f))
+    }), {});
+})();
 
 module.exports = (options) => {
   const rollbar = new Rollbar(omit(options, ['template']));
   const template = templates[get(options, 'template', 'aws-sls-lambda-proxy')];
 
-  // submit a lambda error to rollbar (async)
-  const submitToRollbar = (obj, environment, level, event, context) => {
+  const submitToRollbar = async ({
+    error,
+    environment,
+    level,
+    event,
+    context
+  }) => {
     const msgPrefix = [
-      get(obj, 'statusCode'),
-      get(obj, 'messageId')
+      get(error, 'statusCode'),
+      get(error, 'messageId')
     ].filter((e) => !['', undefined].includes(e)).join('@');
-    const msgBody = get(obj, 'message') || ensureString(obj);
+    const msgBody = get(error, 'message') || ensureString(error);
     const message = [msgPrefix, msgBody].filter((e) => !['', undefined].includes(e)).join(': ');
     if (get(options, 'verbose', false) === true) {
       // eslint-disable-next-line no-console
@@ -29,7 +39,7 @@ module.exports = (options) => {
     }
     rollbar.configure({ payload: { environment } });
     // reference: https://github.com/Rollbar/rollbar.js/#rollbarlog-1
-    rollbar[level](message, obj, {
+    rollbar[level](message, error, {
       context: {
         remainingTimeInMillis: context.getRemainingTimeInMillis(),
         callbackWaitsForEmptyEventLoop: context.callbackWaitsForEmptyEventLoop,
@@ -44,7 +54,7 @@ module.exports = (options) => {
       },
       event
     }, template(event));
-    return Promise.resolve(obj);
+    return error;
   };
 
   /* Wrap Lambda function handler */
@@ -54,9 +64,12 @@ module.exports = (options) => {
       context.callbackWaitsForEmptyEventLoop = false;
 
       // Rollbar logging levels as promise
-      const rb = ['debug', 'info', 'warning', 'error', 'critical'].reduce((final, level) => Object.assign(final, {
-        [level]: (err, env = options.environment) => submitToRollbar(err, env, level, event, context)
-      }), {});
+      const rb = ['debug', 'info', 'warning', 'error', 'critical']
+        .reduce((final, level) => Object.assign(final, {
+          [level]: (error, env = options.environment) => submitToRollbar({
+            error, env, level, event, context
+          })
+        }), {});
 
       try {
         handler(event, context, rb)
@@ -72,9 +85,7 @@ module.exports = (options) => {
         try {
           rb.error(err);
         } finally {
-          rollbar.wait(() => {
-            throw err;
-          });
+          rollbar.wait(() => callback(err));
         }
       }
     }
