@@ -1,72 +1,72 @@
-/* eslint-disable no-console */
 const expect = require('chai').expect;
+const uuid = require('uuid/v4');
+const { describe } = require('node-tdd');
 const Rollbar = require('../src/index');
 
-const rollbarVerbose = Rollbar({
-  enabled: false,
-  verbose: true
-});
-const rollbarNonVerbose = Rollbar({
-  enabled: false,
-  verbose: false
-});
+describe('Testing Rollbar Wrapper', { record: console }, () => {
+  let error;
+  let rollbarVerbose;
+  let rollbarNonVerbose;
+  let executeHandler;
 
-const consoleLogOriginal = console.log;
-const logs = [];
-const error = new Error('Test Error');
-const response = {
-  statusCode: 400,
-  body: '{"message":"Invalid Parameter."}'
-};
-
-const executeHandler = (err, resp, cb) => {
-  rollbarVerbose.wrap(() => (err ? Promise.reject(err) : Promise.resolve(resp)))(
-    {},
-    { getRemainingTimeInMillis: () => 0 },
-    (err_, resp_) => {
-      expect(err_).to.equal(err);
-      expect(resp_).to.equal(resp);
-      expect(logs).to.deep.equal(err === null ? [] : [err.message || err]);
-      cb();
-    }
-  );
-};
-
-describe('Testing Rollbar Wrapper', () => {
   before(() => {
-    console.log = (...args) => Object.keys(args).map((k) => args[k]).forEach((value) => logs.push(value));
-  });
-  after(() => {
-    console.log = consoleLogOriginal;
+    error = new Error(uuid());
+    rollbarVerbose = Rollbar({
+      enabled: false,
+      verbose: true
+    });
+    rollbarNonVerbose = Rollbar({
+      enabled: false,
+      verbose: false
+    });
+    executeHandler = (err, resp) => new Promise((resolve) => {
+      const handler = rollbarVerbose.wrap(() => (err ? Promise.reject(err) : Promise.resolve(resp)));
+      handler(
+        {},
+        { getRemainingTimeInMillis: () => 0 },
+        (err_, resp_) => {
+          resolve([err_, resp_]);
+        }
+      );
+    });
   });
 
-  beforeEach(() => {
-    logs.length = 0;
+  it('Testing Execution Without Error', async ({ recorder }) => {
+    const response = {
+      statusCode: 400,
+      body: '{"message":"Invalid Parameter."}'
+    };
+    const [err, resp] = await executeHandler(null, response);
+    expect(err).to.equal(null);
+    expect(resp).to.equal(response);
+    expect(recorder.get()).to.deep.equal([]);
   });
 
-  it('Testing Execution Without Error', (done) => {
-    executeHandler(null, response, done);
+  it('Testing Execution With Error', async ({ recorder }) => {
+    const [err, resp] = await executeHandler(error, undefined);
+    expect(err).to.equal(error);
+    expect(resp).to.equal(undefined);
+    expect(recorder.get()).to.deep.equal([error.message]);
   });
 
-  it('Testing Execution With Error', (done) => {
-    executeHandler(error, undefined, done);
+  it('Testing Execution With String Error Message', async ({ recorder }) => {
+    const [err, resp] = await executeHandler('String Error', undefined);
+    expect(err).to.equal('String Error');
+    expect(resp).to.equal(undefined);
+    expect(recorder.get()).to.deep.equal(['String Error']);
   });
 
-  it('Testing Execution With String Error Message', (done) => {
-    executeHandler('String Error', undefined, done);
-  });
-
-  it('Testing Exception Verbose', () => {
-    expect(() => rollbarVerbose.wrap(() => {
+  it('Testing Exception Verbose', ({ capture, recorder }) => {
+    capture(() => rollbarVerbose.wrap(() => {
       throw error;
-    })({}, { getRemainingTimeInMillis: () => 0 }, {})).to.throw(error);
-    expect(logs).to.deep.equal([error.message]);
+    })({}, { getRemainingTimeInMillis: () => 0 }, {}));
+    expect(recorder.get()).to.deep.equal([error.message]);
   });
 
-  it('Testing Exception Non-Verbose', () => {
-    expect(() => rollbarNonVerbose.wrap(() => {
+  it('Testing Exception Non-Verbose', ({ capture, recorder }) => {
+    capture(() => rollbarNonVerbose.wrap(() => {
       throw error;
-    })({}, { getRemainingTimeInMillis: () => 0 }, {})).to.throw(error);
-    expect(logs).to.deep.equal([]);
+    })({}, { getRemainingTimeInMillis: () => 0 }, {}));
+    expect(recorder.get()).to.deep.equal([]);
   });
 });
