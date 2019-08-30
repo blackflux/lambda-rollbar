@@ -20,13 +20,18 @@ module.exports = (options) => {
   const rollbar = new Rollbar(omit(options, ['template']));
   const template = templates[get(options, 'template', 'aws-sls-lambda-proxy')];
 
-  // submit a lambda error to rollbar (async)
-  const submitToRollbar = (obj, environment, level, event, context) => {
+  const submitToRollbar = async ({
+    error,
+    environment,
+    level,
+    event,
+    context
+  }) => {
     const msgPrefix = [
-      get(obj, 'statusCode'),
-      get(obj, 'messageId')
+      get(error, 'statusCode'),
+      get(error, 'messageId')
     ].filter((e) => !['', undefined].includes(e)).join('@');
-    const msgBody = get(obj, 'message') || ensureString(obj);
+    const msgBody = get(error, 'message') || ensureString(error);
     const message = [msgPrefix, msgBody].filter((e) => !['', undefined].includes(e)).join(': ');
     if (get(options, 'verbose', false) === true) {
       // eslint-disable-next-line no-console
@@ -34,7 +39,7 @@ module.exports = (options) => {
     }
     rollbar.configure({ payload: { environment } });
     // reference: https://github.com/Rollbar/rollbar.js/#rollbarlog-1
-    rollbar[level](message, obj, {
+    rollbar[level](message, error, {
       context: {
         remainingTimeInMillis: context.getRemainingTimeInMillis(),
         callbackWaitsForEmptyEventLoop: context.callbackWaitsForEmptyEventLoop,
@@ -49,7 +54,7 @@ module.exports = (options) => {
       },
       event
     }, template(event));
-    return Promise.resolve(obj);
+    return error;
   };
 
   /* Wrap Lambda function handler */
@@ -59,9 +64,12 @@ module.exports = (options) => {
       context.callbackWaitsForEmptyEventLoop = false;
 
       // Rollbar logging levels as promise
-      const rb = ['debug', 'info', 'warning', 'error', 'critical'].reduce((final, level) => Object.assign(final, {
-        [level]: (err, env = options.environment) => submitToRollbar(err, env, level, event, context)
-      }), {});
+      const rb = ['debug', 'info', 'warning', 'error', 'critical']
+        .reduce((final, level) => Object.assign(final, {
+          [level]: (error, env = options.environment) => submitToRollbar({
+            error, env, level, event, context
+          })
+        }), {});
 
       try {
         handler(event, context, rb)
