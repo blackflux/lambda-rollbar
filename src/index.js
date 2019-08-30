@@ -85,9 +85,7 @@ module.exports = (options) => {
         try {
           rb.error(err);
         } finally {
-          rollbar.wait(() => {
-            throw err;
-          });
+          rollbar.wait(() => callback(err));
         }
       }
     }
