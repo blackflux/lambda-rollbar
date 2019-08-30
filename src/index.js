@@ -1,15 +1,20 @@
+const fs = require('fs');
+const path = require('path');
 const get = require('lodash.get');
 const omit = require('lodash.omit');
 const Rollbar = require('rollbar');
 const ensureString = require('./util/ensure-string');
 
-const templateSlsLambdaProxy = require('./templates/aws-sls-lambda-proxy');
-const templateAwsCloudWatch = require('./templates/aws-cloud-watch');
-
-const templates = {
-  'aws-sls-lambda-proxy': templateSlsLambdaProxy,
-  'aws-cloud-watch': templateAwsCloudWatch
-};
+const templates = (() => {
+  const templateDir = path.join(__dirname, 'templates');
+  return fs
+    .readdirSync(templateDir)
+    .map((f) => f.slice(0, -3))
+    .reduce((p, f) => Object.assign(p, {
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      [f]: require(path.join(templateDir, f))
+    }), {});
+})();
 
 module.exports = (options) => {
   const rollbar = new Rollbar(omit(options, ['template']));
