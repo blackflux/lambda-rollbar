@@ -12,16 +12,20 @@ describe('Testing Rollbar Wrapper', { record: console, useNock: true }, () => {
   before(() => {
     error = new Error(uuid());
     rollbarVerbose = Rollbar({
-      accessToken: process.env.ACCESS_TOKEN,
-      environment: 'local',
-      enabled: true,
-      verbose: true
+      rollbar: {
+        accessToken: process.env.ACCESS_TOKEN,
+        environment: 'local',
+        enabled: true,
+        verbose: true
+      }
     });
     rollbarNonVerbose = Rollbar({
-      accessToken: process.env.ACCESS_TOKEN,
-      environment: 'local',
-      enabled: true,
-      verbose: false
+      rollbar: {
+        accessToken: process.env.ACCESS_TOKEN,
+        environment: 'local',
+        enabled: true,
+        verbose: false
+      }
     });
     executeHandler = (err, resp) => new Promise((resolve) => {
       const handler = rollbarVerbose.wrap(() => (err ? Promise.reject(err) : Promise.resolve(resp)));
