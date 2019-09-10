@@ -1,4 +1,4 @@
-package# Lambda-Rollbar Wrapper
+# Lambda-Rollbar Wrapper
 
 [![Build Status](https://circleci.com/gh/blackflux/lambda-rollbar.png?style=shield)](https://circleci.com/gh/blackflux/lambda-rollbar)
 [![Test Coverage](https://img.shields.io/coveralls/blackflux/lambda-rollbar/master.svg)](https://coveralls.io/github/blackflux/lambda-rollbar?branch=master)
