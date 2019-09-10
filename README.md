@@ -21,9 +21,11 @@ Define rollbar and wrap handlers with
 <!-- eslint-disable import/no-extraneous-dependencies, import/no-unresolved -->
 ```javascript
 const rollbar = require('lambda-rollbar')({
-  accessToken: 'YOUR_ROLLBAR_ACCESS_TOKEN',
-  environment: 'YOUR_ENVIRONMENT',
-  enabled: true,
+  rollbar: {
+    accessToken: 'YOUR_ROLLBAR_ACCESS_TOKEN',
+    environment: 'YOUR_ENVIRONMENT',
+    enabled: true
+  },
   template: 'aws-sls-lambda-proxy'
 });
 
