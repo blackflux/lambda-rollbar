@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const get = require('lodash.get');
-const omit = require('lodash.omit');
+const Joi = require('joi-strict');
 const Rollbar = require('rollbar');
 const ensureString = require('./util/ensure-string');
 
@@ -17,8 +17,20 @@ const templates = (() => {
 })();
 
 module.exports = (options) => {
-  const rollbar = new Rollbar(omit(options, ['template']));
+  Joi.assert(options, Joi.object().keys({
+    rollbar: Joi.object().keys({
+      accessToken: Joi.string().optional(),
+      environment: Joi.string().optional(),
+      enabled: Joi.boolean().optional(),
+      verbose: Joi.boolean().optional()
+    }),
+    template: Joi.string().optional()
+  }));
+  const rollbarOptions = get(options, 'rollbar');
   const template = templates[get(options, 'template', 'aws-sls-lambda-proxy')];
+  const verbose = get(options, 'rollbar.verbose', false);
+  const rollbarEnvironment = get(options, 'rollbar.environment');
+  const rollbar = new Rollbar(rollbarOptions);
 
   const submitToRollbar = async ({
     error,
@@ -33,7 +45,7 @@ module.exports = (options) => {
     ].filter((e) => !['', undefined].includes(e)).join('@');
     const msgBody = get(error, 'message') || ensureString(error);
     const message = [msgPrefix, msgBody].filter((e) => !['', undefined].includes(e)).join(': ');
-    if (get(options, 'verbose', false) === true) {
+    if (verbose === true) {
       // eslint-disable-next-line no-console
       console.log(message);
     }
@@ -66,7 +78,7 @@ module.exports = (options) => {
       // Rollbar logging levels as promise
       const rb = ['debug', 'info', 'warning', 'error', 'critical']
         .reduce((final, level) => Object.assign(final, {
-          [level]: (error, env = options.environment) => submitToRollbar({
+          [level]: (error, env = rollbarEnvironment) => submitToRollbar({
             error, env, level, event, context
           })
         }), {});

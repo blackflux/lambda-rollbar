@@ -1,4 +1,4 @@
-# Lambda-Rollbar Wrapper
+package# Lambda-Rollbar Wrapper
 
 [![Build Status](https://circleci.com/gh/blackflux/lambda-rollbar.png?style=shield)](https://circleci.com/gh/blackflux/lambda-rollbar)
 [![Test Coverage](https://img.shields.io/coveralls/blackflux/lambda-rollbar/master.svg)](https://coveralls.io/github/blackflux/lambda-rollbar?branch=master)
@@ -21,9 +21,11 @@ Define rollbar and wrap handlers with
 <!-- eslint-disable import/no-extraneous-dependencies, import/no-unresolved -->
 ```javascript
 const rollbar = require('lambda-rollbar')({
-  accessToken: 'YOUR_ROLLBAR_ACCESS_TOKEN',
-  environment: 'YOUR_ENVIRONMENT',
-  enabled: true,
+  rollbar: {
+    accessToken: 'YOUR_ROLLBAR_ACCESS_TOKEN',
+    environment: 'YOUR_ENVIRONMENT',
+    enabled: true
+  },
   template: 'aws-sls-lambda-proxy'
 });
 

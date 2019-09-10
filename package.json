@@ -72,8 +72,8 @@
   ],
   "dependencies": {
     "fast-safe-stringify": "2.0.6",
+    "joi-strict": "1.0.9",
     "lodash.get": "4.4.2",
-    "lodash.omit": "4.5.0",
     "rollbar": "2.12.3"
   },
   "peerDependencies": {},
