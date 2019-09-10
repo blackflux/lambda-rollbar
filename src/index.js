@@ -22,11 +22,12 @@ module.exports = (options) => {
       accessToken: Joi.string().optional(),
       environment: Joi.string().optional(),
       enabled: Joi.boolean().optional(),
-      verbose: Joi.boolean().optional()
-    }),
+      verbose: Joi.boolean().optional(),
+      reportLevel: Joi.string().optional()
+    }).optional(),
     template: Joi.string().optional()
   }));
-  const rollbarOptions = get(options, 'rollbar');
+  const rollbarOptions = get(options, 'rollbar', {});
   const template = templates[get(options, 'template', 'aws-sls-lambda-proxy')];
   const verbose = get(options, 'rollbar.verbose', false);
   const rollbarEnvironment = get(options, 'rollbar.environment');
