@@ -72,7 +72,7 @@
   ],
   "dependencies": {
     "fast-safe-stringify": "2.0.7",
-    "joi-strict": "1.0.9",
+    "joi-strict": "1.0.10",
     "lodash.get": "4.4.2",
     "rollbar": "2.12.3"
   },
