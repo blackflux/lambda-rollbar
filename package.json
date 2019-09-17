@@ -53,10 +53,8 @@
     "eslint-plugin-markdown": "1.0.0",
     "eslint-plugin-mocha": "6.1.0",
     "js-gardener": "2.0.81",
-    "node-tdd": "2.3.0",
     "nyc": "14.1.1",
-    "semantic-release": "15.13.24",
-    "uuid": "3.3.3"
+    "semantic-release": "15.13.24"
   },
   "licenses": [
     {
@@ -70,12 +68,7 @@
   "files": [
     "lib"
   ],
-  "dependencies": {
-    "fast-safe-stringify": "2.0.6",
-    "lodash.get": "4.4.2",
-    "lodash.omit": "4.5.0",
-    "rollbar": "2.12.3"
-  },
+  "dependencies": {},
   "peerDependencies": {},
   "nyc": {
     "tempDir": "./coverage/.nyc_output",
